@@ -9,4 +9,4 @@ function add(num1, num2) {
 button.addEventListener("click", function() {
   console.log(add(+input1.value, + input2.value));
 });
-//to compile type"tsc js-on;y.ts" on terminal
+//to compile type"tsc js-only.ts" on terminal
