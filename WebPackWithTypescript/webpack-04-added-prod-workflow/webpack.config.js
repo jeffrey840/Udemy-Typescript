@@ -1,5 +1,6 @@
 const path = require('path');
 
+//exports javascript object
 module.exports = {
   mode: 'development',
   entry: './src/app.ts',
