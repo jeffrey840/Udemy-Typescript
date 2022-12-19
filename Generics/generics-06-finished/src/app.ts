@@ -11,6 +11,7 @@
 //   // data.split(' ');
 // })
 
+//identifier T(type) & U(type)
 function merge<T extends object, U extends object>(objA: T, objB: U) {
   return Object.assign(objA, objB);
 }
@@ -18,10 +19,13 @@ function merge<T extends object, U extends object>(objA: T, objB: U) {
 const mergedObj = merge({ name: 'Max', hobbies: ['Sports'] }, { age: 30 });
 console.log(mergedObj);
 
+
+//guarantees that length has a number
 interface Lengthy {
   length: number;
 }
 
+//<T extends Lengthy> the return only cares that it has a length property
 function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
   let descriptionText = 'Got no value.';
   if (element.length === 1) {
@@ -32,17 +36,22 @@ function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
   return [element, descriptionText];
 }
 
+//will not work if count and describe is passed a number
 console.log(countAndDescribe(['Sports', 'Cooking']));
 
+
+//KEYOF CONSTRAINT
+//guarantees that the first parameter will be a key
+// and the second parameter will be a key of that object
 function extractAndConvert<T extends object, U extends keyof T>(
   obj: T,
   key: U
 ) {
   return 'Value: ' + obj[key];
 }
-
 extractAndConvert({ name: 'Max' }, 'name');
 
+//GENERIC CLASSES
 class DataStorage<T extends string | number | boolean> {
   private data: T[] = [];
 
@@ -62,6 +71,7 @@ class DataStorage<T extends string | number | boolean> {
   }
 }
 
+//will only store strings
 const textStorage = new DataStorage<string>();
 textStorage.addItem('Max');
 textStorage.addItem('Manu');
@@ -77,6 +87,8 @@ const numberStorage = new DataStorage<number>();
 // // ...
 // objStorage.removeItem(maxObj);
 // console.log(objStorage.getItems());
+
+
 
 interface CourseGoal {
   title: string;
@@ -96,6 +108,12 @@ function createCourseGoal(
   return courseGoal as CourseGoal;
 }
 
+//readonly works on arrays and objects
 const names: Readonly<string[]> = ['Max', 'Anna'];
 // names.push('Manu');
 // names.pop();
+
+//GENERIC VS UNION TYPES
+
+//Union types offer better flexibility withe very method/function ca//
+//generic types lock in a type
